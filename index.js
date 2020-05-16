@@ -31,14 +31,22 @@ app.get('/api', (request, response) => {
 
 
 app.get('/weather/:latlon', async (request, response) => {
-    console.log(request.params)
     const latlon = request.params.latlon.split(',');
-    console.log(latlon);
     const lat = latlon[0];
     const lon = latlon[1];
-    console.log(lat, lon);
-    const api_url = `https://api.darksky.net/forecast/e3189ed0d8f7fb82a8db79b1678dff60/${lat},${lon}`;
-    const fetch_response = await fetch(api_url);
-    const json = await fetch_response.json();
-    response.json(json);
+    const weather_url = `https://api.darksky.net/forecast/e3189ed0d8f7fb82a8db79b1678dff60/${lat},${lon}`;
+    const weather_response = await fetch(weather_url);
+    const weather_data = await weather_response.json();
+
+    const aq_url = `https://api.openaq.org/v1/latest?coordinates=${lat},${lon}`;
+    const aq_response = await fetch(aq_url);
+    const aq_data = await aq_response.json();
+
+
+
+    const data = {
+        weather: weather_data,
+        air_quality: aq_data
+    }
+    response.json(data);
 });
