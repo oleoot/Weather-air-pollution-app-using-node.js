@@ -8,8 +8,7 @@ if (navigator.geolocation) {
         lon = position.coords.longitude;
         latitude.textContent = `${lat}°`;
         longitude.textContent = `${lon}°`;
-        // const api_url = `weather/${lat},${lon}`;
-        const api_url = `/weather`;
+        const api_url = `weather/${lat},${lon}`;
         const response = await fetch(api_url);
         const json = await response.json();
         console.log(json)
