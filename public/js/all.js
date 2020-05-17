@@ -16,18 +16,12 @@ async function getData() {
     console.log(data);
     data.forEach(item => {
         const { lat, lon, weather, air } = item;
-        const div = document.createElement('div');
-        const latitude = document.createElement('p');
-        latitude.innerText = `Широта: ${lat}°`
-        const longitude = document.createElement('p')
-        longitude.innerText = `Долгота: ${lon}°`
-        const weatherp = document.createElement('p');
-        console.log(weather)
-        weatherp.innerText = `Weather: ${weather.summary} | ${weather.temperature}C`;
-        const airp = document.createElement('p');
-        airp.innerText = `Air: ${air.value} ${air.unit}`
-        div.append(latitude, longitude, weatherp, airp)
-        wrapper.append(div);
+        const marker = L.marker([lat, lon]).addTo(mymap);
+
+
+        const txt = `<p>The weather here at ${lat}, ${lon} is ${weather.summary} with a temperature of ${weather.temperature}degrees C.</p>
+        <p>Air quality here is: ${air.value} ${air.unit}`
+        marker.bindPopup(txt);
     });
 }
 getData();
