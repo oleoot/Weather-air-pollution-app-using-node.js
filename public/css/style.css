@@ -11,7 +11,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-background: linear-gradient(#114357,#f29492);
+background: linear-gradient(#fc00ff,#00dbde);
 }
 .home-wrapper{
 padding: 10px 30px;

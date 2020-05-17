@@ -4,13 +4,19 @@ async function getData() {
     const data = await response.json();
     console.log(data);
     data.forEach(item => {
-        const { lat, lon, mood, timestamp } = item
+        const { lat, lon, weather, air } = item;
+        console.log(air)
         const div = document.createElement('div');
         const latitude = document.createElement('p');
         latitude.innerText = `Широта: ${lat}°`
         const longitude = document.createElement('p')
         longitude.innerText = `Долгота: ${lon}°`
-        div.append(latitude, longitude)
+        const weatherp = document.createElement('p');
+        // console.log(weather)
+        weatherp.innerText = `Weather: ${weather.summary} | ${weather.temperature}F`;
+        const airp = document.createElement('p');
+        airp.innerText = `Air: ${air.value} ${air.unit}`
+        div.append(latitude, longitude, weatherp, airp)
         wrapper.append(div);
     });
 }

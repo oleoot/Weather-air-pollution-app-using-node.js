@@ -1,4 +1,4 @@
-let lat, lon;
+let lat, lon, weather, air;
 if (navigator.geolocation) {
     console.log('Geolocation is supported by this browser.')
     navigator.geolocation.getCurrentPosition(async position => {
@@ -15,16 +15,20 @@ if (navigator.geolocation) {
         const api_url = `weather/${lat},${lon}`;
         const response = await fetch(api_url);
         const json = await response.json();
-        const { air_quality, weather } = json;
-        summary.append(weather.currently.summary)
-        temperature.append(weather.currently.temperature);
-        console.log(air_quality.results)
-        air_quality.results.forEach(result => {
-            const air = document.createElement('p');
-            air.append(`${result.city} ${result.measurements[0].value.toFixed(2)} ${result.measurements[0].unit}`)
-            console.log(air)
-            wrapper.append(air)
-        });
+        // const { air_quality, weather } = json;
+        weather = json.weather.currently;
+        console.log(json.air_quality)
+        air = json.air_quality.results[0].measurements[0];
+        summary.append(weather.summary)
+        temperature.append(weather.temperature);
+
+
+        // air_quality.results.forEach(result => {
+        //     const air = document.createElement('p');
+        //     air.append(`${result.city} ${result.measurements[0].value.toFixed(2)} ${result.measurements[0].unit}`)
+        //     console.log(air)
+        //     wrapper.append(air)
+        // });
 
     });
 } else {
@@ -33,7 +37,9 @@ if (navigator.geolocation) {
 // BTN Presses ===========================================================================
 const btn = document.querySelector('#submit')
 btn.addEventListener('click', async event => {
-    const data = { lat, lon };
+
+    const data = { lat, lon, weather, air };
+    console.log(air)
     const options = {
         method: 'POST',
         headers: {
