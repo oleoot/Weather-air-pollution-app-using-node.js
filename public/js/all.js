@@ -1,14 +1,15 @@
-const mymap = L.map('checkinMap').setView([0, 0], 1);
-const attribution =
-    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+const mymap = L.map('checkinMap').setView([0, 0], 2);
 const tileUrl =
     'https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png';
-const tiles = L.tileLayer(tileUrl, { attribution });
+const tiles = L.tileLayer(tileUrl);
+const southWest = L.latLng(-89.98155760646617, -180)
+const northEast = L.latLng(89.99346179538875, 180);
+const bounds = L.latLngBounds(southWest, northEast);
+mymap.setMaxBounds(bounds);
+mymap.on('drag', function () {
+    mymap.panInsideBounds(bounds, { animate: false });
+});
 tiles.addTo(mymap);
-
-
-
-
 const wrapper = document.querySelector('#wrapper')
 async function getData() {
     const response = await fetch('/api');

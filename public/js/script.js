@@ -23,7 +23,6 @@ if (navigator.geolocation) {
             document.querySelector('#temperature').textContent = weather.temperature;
             document.querySelector('#aq_value').textContent = "No reading for current city, pick different one";
         }
-        // BTN Presses ===========================================================================
         const btn = document.querySelector('#submit')
         btn.addEventListener('click', async event => {
 

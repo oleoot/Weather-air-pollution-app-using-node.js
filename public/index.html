@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <title>Weather app using node.js</title>
+    <title>The weather here</title>
 </head>
 
 <body>
@@ -14,14 +14,14 @@
         <h1>The weather here</h1>
         <div class="link-wrap">
             <ul>
-                <li><a href="index.html">Домой</a></li>
-                <li><a href="all.html">База данных</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="all.html">View on map</a></li>
             </ul>
         </div>
-        <p>The weather here at <span id="latitude">&deg;</span>, <span id="longitude">&deg;</span> is <span
-                id="summary"></span> with a temperature of <span id="temperature"></span> degrees C.</p>
-        <p>Air quality here is: <span id="aq_value"></span></p>
-        <button type="submit" id="submit">Отправить</button>
+        <p class="home-info">The weather here at <span id="latitude">&deg;</span>, <span id="longitude">&deg;</span> is
+            <span id="summary"></span> with a temperature of <span id="temperature"></span>&deg;C.</p>
+        <p class="home-info">Air quality here is: <span id="aq_value"></span></p>
+        <button type="submit" id="submit">Send Data</button>
     </div>
     <script src="js/script.js"></script>
 </body>

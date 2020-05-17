@@ -11,10 +11,10 @@ display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-background: linear-gradient(#fc00ff,#00dbde);
+background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(../img/bg.jpg) center/cover;
 }
 .home-wrapper{
-padding: 10px 30px;
+padding: 10px 50px;
 background: #fff;
 }
 video{
@@ -35,19 +35,23 @@ justify-content: center;
 ul{
 list-style-type: none;
 margin-bottom: 20px;
+display: flex;
 }
 li{
 text-align: center;
+margin: 0 20px;
 }
 a{
 text-decoration: none;
-color: #f29492;
+color:#a6bcc4;
 font-size: 40px;
 display: block;
+text-transform: uppercase;
 }
-p{
+.home-info{
 text-align: center;
 font-size: 30px;
+max-width: 900px;
 }
 input{
 width: 50%;
@@ -62,7 +66,7 @@ outline: none;
 button{
 padding: 10px 20px;
 font-size: 25px;
-background: #f29492;
+background: #B9D3DC;
 outline: none;
 border: none;
 display: block;
@@ -70,6 +74,12 @@ margin: 30px auto;
 border-radius: 5px;
 color: #fff;
 cursor: pointer;
+}
+button:hover{
+opacity: 0.8;
+}
+button:active{
+background: #a6bcc4;
 }
 #wrapper{
 display: grid;
@@ -88,10 +98,24 @@ display: block;
 margin-top: 30px;
 }
 #checkinMap {
-width: 800px;
-height: 500px;
-margin: 8px 0px;
+width: 100%;
+height: 100vh;
 }
 .leaflet-control-attribution{
 display: none;
+}
+.leaflet-control-container{
+display: none;
+}
+.menu-wrap{
+width: fit-content;
+position: fixed;
+top: 30px;
+right: 30px;
+padding: 30px;
+display: flex;
+justify-content: center;
+flex-direction: column;
+background: #fff;
+z-index: 10000;
 }
