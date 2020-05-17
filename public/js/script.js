@@ -19,7 +19,8 @@ if (navigator.geolocation) {
         }
         catch (error) {
             console.log(error);
-            air = { value: -1 };
+            air = { value: -1, unit: '' };
+            document.querySelector('#aq_value').textContent = "No reading for current city, pick different one";
         }
         // BTN Presses ===========================================================================
         const btn = document.querySelector('#submit')

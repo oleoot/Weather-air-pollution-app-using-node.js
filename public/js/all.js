@@ -1,3 +1,14 @@
+const mymap = L.map('checkinMap').setView([0, 0], 1);
+const attribution =
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+const tileUrl =
+    'https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png';
+const tiles = L.tileLayer(tileUrl, { attribution });
+tiles.addTo(mymap);
+
+
+
+
 const wrapper = document.querySelector('#wrapper')
 async function getData() {
     const response = await fetch('/api');
@@ -12,7 +23,7 @@ async function getData() {
         longitude.innerText = `Долгота: ${lon}°`
         const weatherp = document.createElement('p');
         console.log(weather)
-        weatherp.innerText = `Weather: ${weather.summary} | ${weather.temperature}F`;
+        weatherp.innerText = `Weather: ${weather.summary} | ${weather.temperature}C`;
         const airp = document.createElement('p');
         airp.innerText = `Air: ${air.value} ${air.unit}`
         div.append(latitude, longitude, weatherp, airp)
