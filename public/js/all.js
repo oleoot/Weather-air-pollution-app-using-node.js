@@ -17,11 +17,15 @@ async function getData() {
     data.forEach(item => {
         const { lat, lon, weather, air } = item;
         const marker = L.marker([lat, lon]).addTo(mymap);
-
-
-        const txt = `<p>The weather here at ${lat}, ${lon} is ${weather.summary} with a temperature of ${weather.temperature}degrees C.</p>
+        if (air.value < 0) {
+            const txt = `<p>The weather here at ${lat}, ${lon} is ${weather.summary} with a temperature of ${weather.temperature}degrees C.</p>
+    <p>Air quality info is not avaliable`
+            marker.bindPopup(txt);
+        } else {
+            const txt = `<p>The weather here at ${lat}, ${lon} is ${weather.summary} with a temperature of ${weather.temperature}degrees C.</p>
         <p>Air quality here is: ${air.value} ${air.unit}`
-        marker.bindPopup(txt);
+            marker.bindPopup(txt);
+        }
     });
 }
 getData();

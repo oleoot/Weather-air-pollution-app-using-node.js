@@ -1,4 +1,3 @@
-let lat, lon;
 if (navigator.geolocation) {
     console.log('Geolocation is supported by this browser.')
     navigator.geolocation.getCurrentPosition(async position => {
@@ -20,6 +19,8 @@ if (navigator.geolocation) {
         catch (error) {
             console.log(error);
             air = { value: -1, unit: '' };
+            document.querySelector('#summary').textContent = weather.summary;
+            document.querySelector('#temperature').textContent = weather.temperature;
             document.querySelector('#aq_value').textContent = "No reading for current city, pick different one";
         }
         // BTN Presses ===========================================================================
