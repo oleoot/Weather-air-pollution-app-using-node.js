@@ -1,52 +1,43 @@
-let lat, lon, weather, air;
+let lat, lon;
 if (navigator.geolocation) {
     console.log('Geolocation is supported by this browser.')
     navigator.geolocation.getCurrentPosition(async position => {
-        const wrapper = document.querySelector('.home-wrapper');
-        console.log(wrapper)
-        const latitude = document.querySelector('#latitude');
-        const longitude = document.querySelector('#longitude');
-        const summary = document.querySelector('#summary');
-        const temperature = document.querySelector('#temperature');
-        lat = position.coords.latitude;
-        lon = position.coords.longitude;
-        latitude.textContent = `${lat.toFixed(2)}°`;
-        longitude.textContent = `${lon.toFixed(2)}°`;
-        const api_url = `weather/${lat},${lon}`;
-        const response = await fetch(api_url);
-        const json = await response.json();
-        // const { air_quality, weather } = json;
-        weather = json.weather.currently;
-        console.log(json.air_quality)
-        air = json.air_quality.results[0].measurements[0];
-        summary.append(weather.summary)
-        temperature.append(weather.temperature);
+        let lat, lon, weather, air;
+        try {
+            lat = position.coords.latitude;
+            lon = position.coords.longitude;
+            document.querySelector('#latitude').textContent = lat.toFixed(2);
+            document.querySelector('#longitude').textContent = lon.toFixed(2)
+            const api_url = `weather/${lat},${lon}`;
+            const response = await fetch(api_url);
+            const json = await response.json();
+            weather = json.weather.currently;
+            air = json.air_quality.results[0].measurements[0];
+            document.querySelector('#summary').textContent = weather.summary;
+            document.querySelector('#temperature').textContent = weather.temperature;
+            document.querySelector('#aq_value').textContent = air.value + air.unit;
+        }
+        catch (error) {
+            console.log(error);
+            air = { value: -1 };
+        }
+        // BTN Presses ===========================================================================
+        const btn = document.querySelector('#submit')
+        btn.addEventListener('click', async event => {
 
-
-        // air_quality.results.forEach(result => {
-        //     const air = document.createElement('p');
-        //     air.append(`${result.city} ${result.measurements[0].value.toFixed(2)} ${result.measurements[0].unit}`)
-        //     console.log(air)
-        //     wrapper.append(air)
-        // });
-
+            const data = { lat, lon, weather, air };
+            console.log(data)
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data),
+            }
+            const db_response = await fetch('/api', options);
+            const db_json = await db_response.json();
+        });
     });
 } else {
     console.log = "Geolocation is not supported by this browser.";
 }
-// BTN Presses ===========================================================================
-const btn = document.querySelector('#submit')
-btn.addEventListener('click', async event => {
-
-    const data = { lat, lon, weather, air };
-    console.log(air)
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data),
-    }
-    const response = await fetch('/api', options);
-    const json = await response.json();
-});

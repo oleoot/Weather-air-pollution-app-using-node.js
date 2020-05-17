@@ -5,14 +5,13 @@ async function getData() {
     console.log(data);
     data.forEach(item => {
         const { lat, lon, weather, air } = item;
-        console.log(air)
         const div = document.createElement('div');
         const latitude = document.createElement('p');
         latitude.innerText = `Широта: ${lat}°`
         const longitude = document.createElement('p')
         longitude.innerText = `Долгота: ${lon}°`
         const weatherp = document.createElement('p');
-        // console.log(weather)
+        console.log(weather)
         weatherp.innerText = `Weather: ${weather.summary} | ${weather.temperature}F`;
         const airp = document.createElement('p');
         airp.innerText = `Air: ${air.value} ${air.unit}`
